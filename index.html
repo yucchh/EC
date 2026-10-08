@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI與經濟研究報告：教育程度與文憑溢價 | 淡江大學</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-dark: #4338ca;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 80px;
+        }
+        header {
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+        header .tag {
+            display: inline-block;
+            background: rgba(99, 102, 241, 0.2);
+            color: #818cf8;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            border: 1px solid rgba(99, 102, 241, 0.3);
+        }
+        header h1 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            margin-bottom: 15px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        header p {
+            color: #94a3b8;
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .container {
+            max-width: 900px;
+            margin: -40px auto 0;
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+        .card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+            border: 1px solid var(--border-color);
+            padding: 40px;
+            margin-bottom: 30px;
+        }
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 15px;
+        }
+        .card-number {
+            width: 40px;
+            height: 40px;
+            background: #eef2ff;
+            color: var(--primary);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+        .card-title h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .card-title p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        /* Topic Grid */
+        .topic-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        @media (min-width: 768px) {
+            .topic-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .topic-box {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .topic-badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            width: fit-content;
+        }
+        .badge-1 { background: #eef2ff; color: #4338ca; }
+        .badge-2 { background: #f3e8ff; color: #7e22ce; }
+        .topic-box h3 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+        .topic-box p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        /* Hypotheses */
+        .hyp-item {
+            background: #f0fdf4;
+            border: 1px solid #dcfce7;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 15px;
+            align-items: flex-start;
+        }
+        .hyp-badge {
+            background: #16a34a;
+            color: white;
+            font-weight: 700;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 6px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .hyp-content h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #166534;
+            margin-bottom: 4px;
+        }
+        .hyp-content p {
+            font-size: 0.85rem;
+            color: #15803d;
+        }
+        /* Mechanisms */
+        .mech-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        @media (min-width: 768px) {
+            .mech-grid { grid-template-columns: 1fr 1fr; }
+        }
+        .mech-box {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px;
+        }
+        .mech-box h5 {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+        .mech-box p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+        /* Charts */
+        .chart-card {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .chart-header h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+        .chart-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: #fef3c7;
+            color: #b45309;
+            padding: 2px 8px;
+            border-radius: 6px;
+        }
+        .chart-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+        .chart-usage {
+            font-size: 0.8rem;
+            background: white;
+            border: 1px solid var(--border-color);
+            padding: 10px 14px;
+            border-radius: 8px;
+            color: #334155;
+        }
+        .tip-box {
+            background: #eef2ff;
+            border: 1px solid #c7d2fe;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 0.85rem;
+            color: #312e81;
+            margin-top: 25px;
+        }
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <span class="tag">淡江大學《AI與經濟研究報告》</span>
+        <h1>教育程度與文憑溢價專題規劃</h1>
+        <p>臺灣 AREMOS 資料庫數據應用與計量經濟研究方案</p>
+    </header>
+
+    <div class="container">
+
+        <!-- Section 1: Topics -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-number">01</div>
+                <div class="card-title">
+                    <h2>創新研究題目設計</h2>
+                    <p>兼具前瞻性與學術規範的雙軌題目</p>
+                </div>
+            </div>
+            <div class="topic-grid">
+                <div class="topic-box">
+                    <div>
+                        <span class="topic-badge badge-1">題目一（推薦核心）</span>
+                        <h3>數位轉型與生成式 AI 普及下之臺灣學歷溢價：基於技能偏向型技術進步與薪資結構變遷之實證研究</h3>
+                    </div>
+                    <p style="margin-top: 12px;">探討 AI 導入與數位化程度如何透過「技能偏向型技術進步（SBTC）」機制，重新形塑高中、大專與研究所畢業生之間的經常性薪資差距。</p>
+                </div>
+                <div class="topic-box">
+                    <div>
+                        <span class="topic-badge badge-2">題目二（進階選用）</span>
+                        <h3>AI 浪潮、勞動市場極化與高等教育文憑溢價的動態演變：臺灣 AREMOS 資料庫之實證剖析</h3>
+                    </div>
+                    <p style="margin-top: 12px;">聚焦於 AI 是否導致常態型認知工作被替代，進而引發中階（大專）與高階（研究所）文憑溢價的分化與極化現象。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 2: Hypothesis & Mechanisms -->
+        <div class="card">
+            <div class="card-header">
+                <div class="card-number">02</div>
+                <div class="card-title">
+                    <h2>研究假說與經濟學理傳導機制</h2>
+                    <p>結合勞動經濟學與計量模型理論基礎</p>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 20px; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">研究假說 (Hypotheses)</div>
+            
+            <div class="hyp-item">
+                <div class="hyp-badge">H1</div>
+                <div class="hyp-content">
+                    <h4>技能互補與溢價擴大假說</h4>
+                    <p>在生成式 AI 普及後，研究所高學歷勞動力因具備較強的抽象思考與技術適應能力，與 AI 產生高度互補性，使其經常性薪資成長率顯著高於高中及大專學歷，導致研究所對高中的「文憑溢價」呈現結構性擴大。</p>
+                </div>
+            </div>
+
+            <div class="hyp-item">
+                <div class="hyp-badge">H2</div>
+                <div class="hyp-content">
+                    <h4>常態性工作替代與中階擠壓假說</h4>
+                    <p>大專學歷勞動者多從事可被 AI 與自動化取代的常態性認知工作，AI 衝擊將導致大專與高中學歷間的薪資溢價出現短暫停滯或壓縮（勞動市場極化效應）。</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; margin-bottom: 15px; font-size: 0.85rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">經濟學理傳導機制 (Transmission Mechanisms)</div>
+            <div class="mech-grid">
+                <div class="
